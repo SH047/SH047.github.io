@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyas S Rai — Robotics Engineer</title>
+<meta name="description" content="Robotics & Automation Engineer. Building AMRs, ROS 2 navigation stacks, and embedded systems from hardware to deployment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --accent: #e8ff4a;
+    --accent2: #4affb0;
+    --text: #f0ede6;
+    --muted: #888880;
+    --border: rgba(240,237,230,0.1);
+    --border-hover: rgba(232,255,74,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem; color:var(--accent); letter-spacing:-0.02em; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:0.875rem; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--text); }
+
+  section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; }
+
+  /* HERO */
+  #hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:8rem; padding-bottom:4rem; max-width:1100px; margin:0 auto; }
+  .hero-eyebrow { font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); font-weight:400; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem; }
+  .hero-eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--accent2); }
+  .hero-name { font-size:clamp(3.5rem,8vw,7rem); font-weight:800; line-height:0.95; letter-spacing:-0.04em; margin-bottom:1.5rem; }
+  .hero-name span { color:var(--accent); }
+  .hero-tagline { font-size:1.25rem; color:var(--muted); max-width:520px; font-weight:300; margin-bottom:3rem; line-height:1.6; }
+  .hero-tagline em { color:var(--text); font-style:normal; font-weight:400; }
+  .hero-cta { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn-primary { background:var(--accent); color:#0a0a0a; padding:0.875rem 2rem; border-radius:2px; font-family:'Syne',sans-serif; font-weight:700; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; transition:transform 0.15s,box-shadow 0.15s; display:inline-block; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,255,74,0.3); }
+  .btn-outline { border:1px solid var(--border); color:var(--text); padding:0.875rem 2rem; border-radius:2px; font-family:'Syne',sans-serif; font-weight:700; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; transition:border-color 0.2s,color 0.2s; display:inline-block; }
+  .btn-outline:hover { border-color:var(--border-hover); color:var(--accent); }
+  .hero-stats { display:flex; gap:3rem; margin-top:5rem; padding-top:3rem; border-top:1px solid var(--border); }
+  .hero-stat-num { font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; color:var(--accent); letter-spacing:-0.04em; }
+  .hero-stat-label { font-size:0.8rem; color:var(--muted); margin-top:0.25rem; }
+
+  /* ABOUT */
+  #about { border-top:1px solid var(--border); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; margin-top:3rem; }
+  .profile-img-wrap { width:100%; aspect-ratio:1; border-radius:2px; overflow:hidden; border:1px solid var(--border); margin-bottom:1.5rem; background:var(--bg3); }
+  .profile-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+  .profile-placeholder { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.75rem; color:var(--muted); font-size:0.8rem; }
+  .about-text { font-size:1.05rem; color:var(--muted); line-height:1.8; }
+  .about-text p+p { margin-top:1.25rem; }
+  .about-text strong { color:var(--text); font-weight:400; }
+  .about-links { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+  .about-link { display:flex; align-items:center; gap:0.75rem; color:var(--muted); text-decoration:none; font-size:0.9rem; padding:0.875rem 1.25rem; border:1px solid var(--border); border-radius:2px; transition:border-color 0.2s,color 0.2s; }
+  .about-link:hover { border-color:var(--border-hover); color:var(--accent); }
+  .about-right h3 { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
+  .info-row { display:flex; justify-content:space-between; align-items:baseline; padding:0.875rem 0; border-bottom:1px solid var(--border); font-size:0.9rem; }
+  .info-row:last-child { border-bottom:none; }
+  .info-label { color:var(--muted); }
+  .info-value { color:var(--text); text-align:right; }
+  .info-value.accent { color:var(--accent2); }
+
+  /* SKILLS */
+  #skills { border-top:1px solid var(--border); }
+  .skills-intro { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:3rem; max-width:600px; line-height:1.1; }
+  .skills-intro span { color:var(--accent); }
+  .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+  .skill-card { background:var(--bg); padding:2rem 1.75rem; transition:background 0.2s; }
+  .skill-card:hover { background:var(--bg3); }
+  .skill-cat { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+  .skill-card h3 { font-size:1rem; font-weight:700; margin-bottom:0.875rem; }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .tag { font-size:0.75rem; padding:0.3rem 0.7rem; border:1px solid var(--border); border-radius:1px; color:var(--muted); }
+
+  /* PROJECTS */
+  #projects { border-top:1px solid var(--border); }
+  .projects-grid { display:flex; flex-direction:column; gap:1px; background:var(--border); margin-top:3rem; }
+  .project-card { background:var(--bg); transition:background 0.2s; }
+  .project-card:hover { background:var(--bg3); }
+  .project-inner { display:grid; grid-template-columns:1fr 380px; gap:0; }
+  .project-content { padding:2.5rem; }
+  .project-img-wrap { position:relative; overflow:hidden; border-left:1px solid var(--border); }
+  .project-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+  .project-card:hover .project-img-wrap img { transform:scale(1.03); }
+  .project-img-placeholder { width:100%; height:100%; min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.75rem; background:var(--bg3); color:var(--muted); font-size:0.8rem; text-align:center; padding:1rem; }
+  .project-img-filename { font-size:0.7rem; color:rgba(136,136,128,0.5); font-family:monospace; margin-top:0.25rem; }
+  .project-number { font-family:'Syne',sans-serif; font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; margin-bottom:0.75rem; }
+  .project-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:0.875rem; gap:1rem; }
+  .project-title { font-size:1.35rem; font-weight:800; letter-spacing:-0.02em; }
+  .project-badge { font-size:0.65rem; padding:0.3rem 0.75rem; border-radius:1px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; white-space:nowrap; flex-shrink:0; }
+  .badge-live { background:rgba(74,255,176,0.12); color:var(--accent2); border:1px solid rgba(74,255,176,0.2); }
+  .badge-oss { background:rgba(232,255,74,0.1); color:var(--accent); border:1px solid rgba(232,255,74,0.2); }
+  .badge-research { background:rgba(255,255,255,0.05); color:var(--muted); border:1px solid var(--border); }
+  .project-desc { font-size:0.9rem; color:var(--muted); line-height:1.7; }
+  .project-stack { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.25rem; }
+  .stack-tag { font-size:0.7rem; padding:0.25rem 0.6rem; background:var(--bg3); border:1px solid var(--border); border-radius:1px; color:var(--muted); }
+  .project-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--accent); text-decoration:none; font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-top:1.5rem; transition:gap 0.2s; }
+  .project-link:hover { gap:0.75rem; }
+
+  /* EXPERIENCE */
+  #experience { border-top:1px solid var(--border); }
+  .exp-grid { display:flex; flex-direction:column; margin-top:3rem; }
+  .exp-item { display:grid; grid-template-columns:200px 1fr; gap:3rem; padding:2.5rem 0; border-bottom:1px solid var(--border); }
+  .exp-item:last-child { border-bottom:none; }
+  .exp-date { font-size:0.8rem; color:var(--muted); padding-top:0.25rem; }
+  .exp-org { font-size:0.75rem; color:var(--accent2); margin-bottom:0.5rem; letter-spacing:0.05em; }
+  .exp-role { font-size:1.1rem; font-weight:700; margin-bottom:0.875rem; }
+  .exp-desc { font-size:0.9rem; color:var(--muted); line-height:1.75; }
+  .exp-desc li { margin-left:1rem; margin-bottom:0.4rem; }
+
+  /* ACHIEVEMENTS */
+  #achievements { border-top:1px solid var(--border); }
+  .ach-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); margin-top:3rem; }
+  .ach-card { background:var(--bg); padding:2rem; transition:background 0.2s; }
+  .ach-card:hover { background:var(--bg3); }
+  .ach-icon { font-size:1.5rem; margin-bottom:1rem; }
+  .ach-title { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+  .ach-desc { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
+  /* CONTACT */
+  #contact { border-top:1px solid var(--border); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; margin-top:3rem; }
+  .contact-left h2 { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1.5rem; }
+  .contact-left h2 span { color:var(--accent); }
+  .contact-left p { font-size:0.95rem; color:var(--muted); line-height:1.75; margin-bottom:2rem; }
+  .contact-direct { display:flex; flex-direction:column; gap:0.875rem; }
+  .contact-item { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border:1px solid var(--border); text-decoration:none; color:var(--text); border-radius:2px; transition:border-color 0.2s; font-size:0.875rem; }
+  .contact-item:hover { border-color:var(--border-hover); }
+  .contact-item-label { font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.125rem; }
+  form { display:flex; flex-direction:column; gap:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+  .form-group label { font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; }
+  .form-group input, .form-group textarea { background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:0.875rem 1rem; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.2s; resize:none; }
+  .form-group input:focus, .form-group textarea:focus { border-color:rgba(232,255,74,0.4); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(136,136,128,0.5); }
+  .form-submit { background:var(--accent); color:#0a0a0a; border:none; padding:1rem 2rem; border-radius:2px; cursor:pointer; font-family:'Syne',sans-serif; font-weight:700; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; transition:transform 0.15s,box-shadow 0.15s; align-self:flex-start; }
+  .form-submit:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,255,74,0.3); }
+  .form-success { display:none; color:var(--accent2); font-size:0.9rem; padding:1rem; border:1px solid rgba(74,255,176,0.2); border-radius:2px; background:rgba(74,255,176,0.05); }
+
+  footer { border-top:1px solid var(--border); padding:2rem 4rem; max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--muted); }
+
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--bg3); border-radius:2px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .hero-eyebrow{animation:fadeUp 0.6s ease both}
+  .hero-name{animation:fadeUp 0.6s 0.1s ease both}
+  .hero-tagline{animation:fadeUp 0.6s 0.2s ease both}
+  .hero-cta{animation:fadeUp 0.6s 0.3s ease both}
+  .hero-stats{animation:fadeUp 0.6s 0.4s ease both}
+
+  @media(max-width:900px){
+    .project-inner{grid-template-columns:1fr}
+    .project-img-wrap{border-left:none;border-top:1px solid var(--border);min-height:220px}
+  }
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .nav-links{display:none}
+    section{padding:4rem 1.5rem}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+    .skills-grid{grid-template-columns:1fr}
+    .ach-grid{grid-template-columns:1fr}
+    .exp-item{grid-template-columns:1fr;gap:0.5rem}
+    .hero-stats{gap:1.5rem;flex-wrap:wrap}
+    footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SSR</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero" style="padding-top:8rem;padding-bottom:4rem;">
+  <div class="hero-eyebrow">Available from June 2026 · Bengaluru, India</div>
+  <h1 class="hero-name">Shreyas<br>S <span>Rai</span></h1>
+  <p class="hero-tagline">Robotics & Automation Engineer building <em>autonomous mobile robots</em>, full-stack ROS 2 navigation, and <em>intelligent embedded systems</em> from hardware to deployment.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-outline">Get In Touch</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hero-stat-num">4×</div><div class="hero-stat-label">Competition Winner</div></div>
+    <div><div class="hero-stat-num">3</div><div class="hero-stat-label">IISc Research Projects</div></div>
+    <div><div class="hero-stat-num">2</div><div class="hero-stat-label">Research Institutes</div></div>
+    <div><div class="hero-stat-num">8.6</div><div class="hero-stat-label">GPA</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <div class="profile-img-wrap" style="max-width:280px;">
+        <img src="images/profile/profile.jpg" alt="Shreyas S Rai"
+          onerror="this.parentElement.innerHTML='<div class=\'profile-placeholder\'>📷<span>Add your photo<br><span style=\'font-family:monospace;font-size:0.7rem;opacity:0.5\'>images/profile/profile.jpg</span></span></div>'">
+      </div>
+      <div class="about-text">
+        <p>Final-year Robotics & Automation Engineering student at Rajarajeswari College of Engineering, Bengaluru (VTU), graduating June 2026.</p>
+        <p>I build robots from scratch — mechanical design in Fusion 360, custom PCBs, embedded firmware, and complete ROS 2 navigation stacks. No kits. No shortcuts.</p>
+        <p>Currently leading hardware and firmware engineering for <strong>ArrayButton</strong> at IISc CPDM — a government-funded acoustic platform. Previously integrated <strong>ABB and FANUC</strong> robots into a hybrid manufacturing cell at IIT Dharwad.</p>
+        <p>Long-term target: Robotics Systems Architect — ROS 2 at scale, advanced SLAM, AI-driven perception.</p>
+      </div>
+      <div class="about-links">
+        <a href="https://github.com/SH047" class="about-link" target="_blank">⌥ github.com/SH047</a>
+        <a href="https://www.linkedin.com/in/shreyas-s-rai" class="about-link" target="_blank">↗ linkedin.com/in/shreyas-s-rai</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <h3>Quick Info</h3>
+      <div class="info-row"><span class="info-label">Degree</span><span class="info-value">B.E. Robotics & Automation</span></div>
+      <div class="info-row"><span class="info-label">University</span><span class="info-value">VTU, Bengaluru</span></div>
+      <div class="info-row"><span class="info-label">Graduating</span><span class="info-value accent">June 2026</span></div>
+      <div class="info-row"><span class="info-label">Location</span><span class="info-value">Bengaluru, Karnataka</span></div>
+      <div class="info-row"><span class="info-label">Open to</span><span class="info-value">Full-time · Bengaluru / Remote</span></div>
+      <div class="info-row"><span class="info-label">Focus</span><span class="info-value">AMR Software · ROS 2 · SLAM</span></div>
+      <div class="info-row"><span class="info-label">GitHub</span><span class="info-value accent">github.com/SH047</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2 class="skills-intro">Built on<br><span>real hardware.</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Navigation</div>
+      <h3>Mobile Robotics</h3>
+      <div class="skill-tags">
+        <span class="tag">ROS 2 Jazzy</span><span class="tag">ROS 1 Noetic</span><span class="tag">Nav2</span>
+        <span class="tag">SLAM Toolbox</span><span class="tag">gmapping</span><span class="tag">AMCL</span>
+        <span class="tag">move_base</span><span class="tag">EKF Fusion</span><span class="tag">robot_localization</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Embedded</div>
+      <h3>Hardware & Systems</h3>
+      <div class="skill-tags">
+        <span class="tag">Raspberry Pi 5/4</span><span class="tag">Arduino</span><span class="tag">ESP32</span>
+        <span class="tag">BNO055 IMU</span><span class="tag">RPLiDAR</span><span class="tag">PCA9685</span>
+        <span class="tag">Motor Control</span><span class="tag">PID Tuning</span><span class="tag">PCB Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Protocols</div>
+      <h3>Communication</h3>
+      <div class="skill-tags">
+        <span class="tag">I2C</span><span class="tag">SPI</span><span class="tag">UART</span>
+        <span class="tag">CAN Bus</span><span class="tag">Modbus TCP/IP</span><span class="tag">BLE (NimBLE)</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Software</div>
+      <h3>Programming</h3>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">C++</span><span class="tag">Embedded C</span>
+        <span class="tag">Linux (Ubuntu)</span><span class="tag">Git</span><span class="tag">OpenCV</span><span class="tag">Shell Scripting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Industrial</div>
+      <h3>Robot Systems</h3>
+      <div class="skill-tags">
+        <span class="tag">ABB IRB</span><span class="tag">RobotStudio</span>
+        <span class="tag">FANUC M-20iD</span><span class="tag">Roboguide</span><span class="tag">Multi-robot Cell</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Design & Fab</div>
+      <h3>Mechanical</h3>
+      <div class="skill-tags">
+        <span class="tag">Fusion 360</span><span class="tag">Solid Edge</span>
+        <span class="tag">FDM Printing</span><span class="tag">SLA Printing</span><span class="tag">Tolerance Analysis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <h2 style="font-size:2.5rem;font-weight:800;letter-spacing:-0.03em;">Work that<br>ships.</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">01 — Current</div>
+          <div class="project-header">
+            <div class="project-title">Wheeled AMR — ROS 2 Navigation Stack</div>
+            <span class="project-badge badge-live">Active Build</span>
+          </div>
+          <p class="project-desc">Ground-up autonomous mobile robot on Raspberry Pi 5 running Ubuntu Server 24.04 ARM64 with full ROS 2 Jazzy stack. RPLiDAR A1, BNO055 IMU, and wheel encoders fused through EKF via robot_localization. Nav2 + SLAM Toolbox for real-time indoor mapping and autonomous navigation. Custom 3-level MDF chassis, L298N motor driver, all wiring from scratch.</p>
+          <div class="project-stack">
+            <span class="stack-tag">ROS 2 Jazzy</span><span class="stack-tag">Nav2</span><span class="stack-tag">SLAM Toolbox</span>
+            <span class="stack-tag">EKF</span><span class="stack-tag">RPLiDAR A1</span><span class="stack-tag">Raspberry Pi 5</span>
+            <span class="stack-tag">Ubuntu 24.04 ARM64</span><span class="stack-tag">robot_localization</span>
+          </div>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/amr.jpg" alt="Wheeled AMR robot"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add your AMR photo<span class=\'project-img-filename\'>images/projects/amr.jpg</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">02 — Open Source</div>
+          <div class="project-header">
+            <div class="project-title">ECHO-Q — Quadruped Autonomous Robot</div>
+            <span class="project-badge badge-oss">Open Source</span>
+          </div>
+          <p class="project-desc">Full quadruped built from scratch: carbon fibre-infused SLA/FDM chassis, 12× 25 kg servos via I2C PCA9685, Dingo-based geometric IK, and complete ROS 1 Noetic navigation stack (gmapping → AMCL → move_base). Custom PCB: star-point power distribution, TPS54560 buck converter, parallel MOSFET E-stop. Won 4 collegiate competitions including IISc ROBOArena 2025.</p>
+          <div class="project-stack">
+            <span class="stack-tag">ROS 1 Noetic</span><span class="stack-tag">Raspberry Pi 4</span>
+            <span class="stack-tag">BNO055</span><span class="stack-tag">RPLiDAR</span><span class="stack-tag">PCA9685</span>
+            <span class="stack-tag">PCB Design</span><span class="stack-tag">SLA/FDM</span>
+          </div>
+          <a href="https://github.com/SH047/ECHO_Q" class="project-link" target="_blank">View on GitHub →</a>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/echoq.jpg" alt="ECHO-Q Quadruped Robot"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add your ECHO-Q photo<span class=\'project-img-filename\'>images/projects/echoq.jpg</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">03 — IISc CPDM</div>
+          <div class="project-header">
+            <div class="project-title">ArrayButton — Acoustic Awareness Platform</div>
+            <span class="project-badge badge-research">Research</span>
+          </div>
+          <p class="project-desc">Project lead on a government-funded market-ready product at IISc CPDM. ESP32-S3 based acoustic situational awareness device — INMP441 I2S microphone, Edge Impulse wake-word model, W25Q64 SPI flash audio queuing, NimBLE BLE transfer pipeline. Drove product from PoC to full field deployment.</p>
+          <div class="project-stack">
+            <span class="stack-tag">ESP32-S3</span><span class="stack-tag">Edge Impulse</span>
+            <span class="stack-tag">I2S / SPI</span><span class="stack-tag">NimBLE BLE</span>
+            <span class="stack-tag">Embedded C</span><span class="stack-tag">Whisper STT</span>
+          </div>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/arraybutton.jpg" alt="ArrayButton acoustic platform"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add ArrayButton photo<span class=\'project-img-filename\'>images/projects/arraybutton.jpg</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">04 — IIT Dharwad</div>
+          <div class="project-header">
+            <div class="project-title">Hybrid WAAM/DED Robotic Manufacturing Cell</div>
+            <span class="project-badge badge-research">Research</span>
+          </div>
+          <p class="project-desc">Designed and fabricated custom end-effector fixtures for ABB IRB arm for Wire Arc Additive Manufacturing (WAAM) and Directed Energy Deposition (DED). Integrated ABB IRB and FANUC M-20iD/25 over Modbus TCP/IP into a unified hybrid cell enabling coordinated multi-robot execution.</p>
+          <div class="project-stack">
+            <span class="stack-tag">ABB IRB</span><span class="stack-tag">FANUC M-20iD/25</span>
+            <span class="stack-tag">Modbus TCP/IP</span><span class="stack-tag">RobotStudio</span>
+            <span class="stack-tag">Roboguide</span><span class="stack-tag">Fusion 360</span>
+          </div>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/waam.jpg" alt="WAAM robotic manufacturing cell"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add WAAM cell photo<span class=\'project-img-filename\'>images/projects/waam.jpg</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">05</div>
+          <div class="project-header">
+            <div class="project-title">Vital — EMG-Controlled Prosthetic Arm</div>
+            <span class="project-badge badge-research">HMI Research</span>
+          </div>
+          <p class="project-desc">Designed 2-stage amplifier and 20–500 Hz bandpass filter for sEMG signal acquisition and real-time gesture classification. Fabricated 5-DOF underactuated hand with tendon-driven linkages in Fusion 360, FDM printed PLA. Full signal conditioning circuit on Arduino Nano.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Arduino Nano</span><span class="stack-tag">Embedded C</span>
+            <span class="stack-tag">Signal Conditioning</span><span class="stack-tag">Fusion 360</span><span class="stack-tag">FDM</span>
+          </div>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/emg.jpg" alt="EMG prosthetic arm"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add EMG arm photo<span class=\'project-img-filename\'>images/projects/emg.jpg</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2 style="font-size:2.5rem;font-weight:800;letter-spacing:-0.03em;">Where I've<br>built things.</h2>
+  <div class="exp-grid">
+    <div class="exp-item">
+      <div class="exp-date">Oct 2025 – Present</div>
+      <div>
+        <div class="exp-org">IISc CPDM · Bengaluru</div>
+        <div class="exp-role">Product Development Intern</div>
+        <div class="exp-desc"><ul>
+          <li>Project lead on ArrayButton — directed hardware and firmware engineering for a government-funded acoustic situational awareness platform, driving it from PoC to field deployment.</li>
+          <li>Contributing to KYRA (Agentic AI) and GaitMate (biomechanical gait analysis) — embedded systems integration and mechanical prototyping on two additional funded projects.</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jul – Sep 2025</div>
+      <div>
+        <div class="exp-org">IIT Dharwad · Advanced Manufacturing Lab</div>
+        <div class="exp-role">Summer Research Intern</div>
+        <div class="exp-desc"><ul>
+          <li>Designed and fabricated custom end-effector fixtures for ABB IRB arm supporting WAAM and DED processes using Fusion 360 and FDM printing.</li>
+          <li>Implemented Modbus TCP/IP integration between ABB IRB and FANUC M-20iD/25 controllers for coordinated multi-robot cell execution.</li>
+          <li>Developed standardised deposition path templates in RobotStudio and Roboguide, reducing manual programming time significantly.</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-label">Achievements</div>
+  <h2 style="font-size:2.5rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:3rem;">Recognition.</h2>
+  <div class="ach-grid">
+    <div class="ach-card">
+      <div class="ach-icon" style="color:var(--accent);">◈</div>
+      <div class="ach-title">IISc ROBOArena Winner</div>
+      <div class="ach-desc">Winner of the Intelligent Machines Arena Challenge at IISc, 2025 — the most competitive robotics event at one of India's premier research institutions.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon" style="color:var(--accent);">◈</div>
+      <div class="ach-title">4× College Competition Winner</div>
+      <div class="ach-desc">Won every collegiate competition entered with ECHO-Q, including INNOVATE 2K24 and 2K25 (RRIIC). Cash grant recipient across all four events.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon" style="color:var(--accent2);">◈</div>
+      <div class="ach-title">Lead Researcher — IISc CPDM</div>
+      <div class="ach-desc">Selected as project lead on ArrayButton at IISc CPDM's government-funded initiatives. Simultaneously contributing to two other active research projects.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon" style="color:var(--accent2);">◈</div>
+      <div class="ach-title">Open Source Contributor</div>
+      <div class="ach-desc">ECHO-Q codebase and hardware files publicly released on GitHub. Personal FDM and SLA printer owner for 3+ years — fabricating production-quality parts for every project.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <h2>Let's build<br><span>something.</span></h2>
+      <p>Open to full-time robotics engineering roles in Bengaluru. Also open to remote and relocation. Available from June 2026.</p>
+      <div class="contact-direct">
+        <a href="mailto:Shreyas.rai.47@gmail.com" class="contact-item">
+          <div><div class="contact-item-label">Email</div><div>Shreyas.rai.47@gmail.com</div></div>
+        </a>
+        <a href="tel:+916361292535" class="contact-item">
+          <div><div class="contact-item-label">Phone</div><div>+91 6361292535</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/shreyas-s-rai" class="contact-item" target="_blank">
+          <div><div class="contact-item-label">LinkedIn</div><div>linkedin.com/in/shreyas-s-rai</div></div>
+        </a>
+        <a href="https://github.com/SH047" class="contact-item" target="_blank">
+          <div><div class="contact-item-label">GitHub</div><div>github.com/SH047</div></div>
+        </a>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Company / Role</label><input type="text" placeholder="Where are you from?"></div>
+        <div class="form-group"><label>Message</label><textarea rows="5" placeholder="What's on your mind?" required></textarea></div>
+        <button type="submit" class="form-submit">Send Message →</button>
+        <div class="form-success" id="formSuccess">Message received. I'll get back to you within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Shreyas S Rai</span>
+  <span style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.1em;">ROBOTICS & AUTOMATION ENGINEER</span>
+  <span>Bengaluru, India</span>
+</footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  document.getElementById('formSuccess').style.display = 'block';
+  this.reset();
+  setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+});
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
