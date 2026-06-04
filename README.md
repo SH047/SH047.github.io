@@ -10,15 +10,17 @@ Personal portfolio site hosted via GitHub Pages.
 portfolio/
 ├── index.html          ← main portfolio file
 ├── README.md
+├── assets/
+│   └── Shreyas_S_Rai_Resume.pdf
 └── images/
     ├── profile/
-    │   └── profile.jpg          ← YOUR PHOTO (replace this)
+    │   └── profile.jpeg         ← Your photo
     └── projects/
-        ├── amr.jpg              ← Wheeled AMR project photo
-        ├── echoq.jpg            ← ECHO-Q quadruped photo
-        ├── arraybutton.jpg      ← ArrayButton/IISc project photo
-        ├── waam.jpg             ← IIT Dharwad WAAM cell photo
-        └── emg.jpg              ← EMG prosthetic arm photo
+        ├── amr.jpeg             ← Wheeled AMR project photo
+        ├── echoq.jpeg           ← ECHO-Q quadruped photo
+        ├── arraybutton.png      ← ArrayButton/IISc project photo
+        ├── waam.jpeg            ← IIT Dharwad WAAM cell photo
+        └── emg.jpeg             ← EMG prosthetic arm photo
 ```
 
 ## How to Add Your Photos
