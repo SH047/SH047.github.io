@@ -49,21 +49,34 @@
   .section-label { font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; }
 
   /* HERO */
-  #hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:8rem; padding-bottom:4rem; max-width:1100px; margin:0 auto; }
-  .hero-eyebrow { font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); font-weight:400; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem; }
+  #hero { position:relative; min-height:100vh; max-width:none; margin:0; padding:0; overflow:hidden; display:flex; align-items:center; }
+  .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transform:scale(1.04); filter:grayscale(0.18) saturate(0.72) contrast(1.16) brightness(0.58); }
+  .hero-scrim { position:absolute; inset:0; z-index:1; background:
+    radial-gradient(ellipse at 62% 42%, rgba(232,255,74,0.16), transparent 28%),
+    radial-gradient(ellipse at 78% 20%, rgba(255,255,255,0.10), transparent 22%),
+    linear-gradient(90deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.48) 68%, rgba(0,0,0,0.72) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.22) 40%, rgba(10,10,10,0.98) 100%);
+  }
+  .hero-grain { position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0.34; background:
+    radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.12) 46%, rgba(0,0,0,0.78) 100%),
+    linear-gradient(rgba(255,255,255,0.035), rgba(255,255,255,0));
+    mix-blend-mode:screen;
+  }
+  .hero-content { position:relative; z-index:3; width:min(1100px,100%); margin:0 auto; padding:8rem 4rem 4rem; }
+  .hero-eyebrow { font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2); font-weight:400; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem; text-shadow:0 2px 18px rgba(0,0,0,0.65); }
   .hero-eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--accent2); }
-  .hero-name { font-size:clamp(3.5rem,8vw,7rem); font-weight:800; line-height:0.95; letter-spacing:-0.04em; margin-bottom:1.5rem; }
+  .hero-name { font-size:clamp(3.8rem,9vw,8.3rem); font-weight:800; line-height:0.9; letter-spacing:-0.04em; margin-bottom:1.5rem; max-width:780px; text-shadow:0 22px 70px rgba(0,0,0,0.72); }
   .hero-name span { color:var(--accent); }
-  .hero-tagline { font-size:1.25rem; color:var(--muted); max-width:520px; font-weight:300; margin-bottom:3rem; line-height:1.6; }
+  .hero-tagline { font-size:1.25rem; color:rgba(240,237,230,0.78); max-width:560px; font-weight:300; margin-bottom:3rem; line-height:1.6; text-shadow:0 12px 34px rgba(0,0,0,0.78); }
   .hero-tagline em { color:var(--text); font-style:normal; font-weight:400; }
   .hero-cta { display:flex; gap:1rem; flex-wrap:wrap; }
   .btn-primary { background:var(--accent); color:#0a0a0a; padding:0.875rem 2rem; border-radius:2px; font-family:'Syne',sans-serif; font-weight:700; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; transition:transform 0.15s,box-shadow 0.15s; display:inline-block; }
   .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,255,74,0.3); }
   .btn-outline { border:1px solid var(--border); color:var(--text); padding:0.875rem 2rem; border-radius:2px; font-family:'Syne',sans-serif; font-weight:700; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; text-decoration:none; transition:border-color 0.2s,color 0.2s; display:inline-block; }
   .btn-outline:hover { border-color:var(--border-hover); color:var(--accent); }
-  .hero-stats { display:flex; gap:3rem; margin-top:5rem; padding-top:3rem; border-top:1px solid var(--border); }
+  .hero-stats { display:flex; gap:3rem; margin-top:5rem; padding-top:3rem; border-top:1px solid rgba(240,237,230,0.18); max-width:900px; }
   .hero-stat-num { font-family:'Syne',sans-serif; font-size:2.5rem; font-weight:800; color:var(--accent); letter-spacing:-0.04em; }
-  .hero-stat-label { font-size:0.8rem; color:var(--muted); margin-top:0.25rem; }
+  .hero-stat-label { font-size:0.8rem; color:rgba(240,237,230,0.7); margin-top:0.25rem; }
 
   /* ABOUT */
   #about { border-top:1px solid var(--border); }
@@ -88,8 +101,8 @@
   #skills { border-top:1px solid var(--border); }
   .skills-intro { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:3rem; max-width:600px; line-height:1.1; }
   .skills-intro span { color:var(--accent); }
-  .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
-  .skill-card { background:var(--bg); padding:2rem 1.75rem; transition:background 0.2s; }
+  .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:transparent; }
+  .skill-card { background:var(--bg); border:1px solid var(--border); padding:2rem 1.75rem; transition:background 0.2s; }
   .skill-card:hover { background:var(--bg3); }
   .skill-cat { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
   .skill-card h3 { font-size:1rem; font-weight:700; margin-bottom:0.875rem; }
@@ -103,8 +116,8 @@
   .project-card:hover { background:var(--bg3); }
   .project-inner { display:grid; grid-template-columns:1fr 380px; gap:0; }
   .project-content { padding:2.5rem; }
-  .project-img-wrap { position:relative; overflow:hidden; border-left:1px solid var(--border); cursor:zoom-in; }
-  .project-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+  .project-img-wrap { position:relative; overflow:hidden; border-left:1px solid var(--border); cursor:zoom-in; background:#050505; display:flex; align-items:center; justify-content:center; }
+  .project-img-wrap img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; transition:transform 0.4s ease; }
   .project-card:hover .project-img-wrap img { transform:scale(1.03); }
   .project-img-wrap::after { content:'View full image'; position:absolute; right:1rem; bottom:1rem; padding:0.35rem 0.65rem; background:rgba(10,10,10,0.72); border:1px solid var(--border); color:var(--text); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0; transform:translateY(6px); transition:opacity 0.2s,transform 0.2s; pointer-events:none; }
   .project-img-wrap:hover::after { opacity:1; transform:translateY(0); }
@@ -139,8 +152,8 @@
   .github-intro { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; margin-top:0.5rem; }
   .github-intro h2 { font-size:2.5rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1; }
   .github-intro p { max-width:420px; color:var(--muted); font-size:0.95rem; line-height:1.75; }
-  .github-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); margin-top:3rem; }
-  .github-card { background:var(--bg); padding:2rem; text-decoration:none; color:var(--text); transition:background 0.2s,transform 0.15s; min-height:250px; display:flex; flex-direction:column; }
+  .github-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:transparent; margin-top:3rem; }
+  .github-card { background:var(--bg); border:1px solid var(--border); padding:2rem; text-decoration:none; color:var(--text); transition:background 0.2s,transform 0.15s; min-height:250px; display:flex; flex-direction:column; }
   .github-card:hover { background:var(--bg3); transform:translateY(-2px); }
   .github-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
   .github-name { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800; letter-spacing:-0.02em; }
@@ -219,6 +232,7 @@
     nav{padding:1rem 1.5rem}
     .nav-links{display:none}
     section{padding:4rem 1.5rem}
+    .hero-content{padding:7rem 1.5rem 3rem}
     .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
     .skills-grid{grid-template-columns:1fr}
     .github-intro{align-items:flex-start;flex-direction:column}
@@ -247,19 +261,26 @@
   </ul>
 </nav>
 
-<section id="hero" style="padding-top:8rem;padding-bottom:4rem;">
-  <div class="hero-eyebrow">Available from June 2026 · Bengaluru, India</div>
-  <h1 class="hero-name">Shreyas<br>S <span>Rai</span></h1>
-  <p class="hero-tagline">Robotics & Automation Engineer building <em>autonomous mobile robots</em>, full-stack ROS 2 navigation, and <em>intelligent embedded systems</em> from hardware to deployment.</p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn-primary">View My Work</a>
-    <a href="#contact" class="btn-outline">Get In Touch</a>
-  </div>
-  <div class="hero-stats">
-    <div><div class="hero-stat-num">4×</div><div class="hero-stat-label">Competition Winner</div></div>
-    <div><div class="hero-stat-num">3</div><div class="hero-stat-label">IISc Research Projects</div></div>
-    <div><div class="hero-stat-num">2</div><div class="hero-stat-label">Research Institutes</div></div>
-    <div><div class="hero-stat-num">8.6</div><div class="hero-stat-label">GPA</div></div>
+<section id="hero">
+  <video autoplay loop muted playsinline class="hero-video">
+    <source src="https://res.cloudinary.com/dfonotyfb/video/upload/v1775585556/dds3_1_rqhg7x.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Available from June 2026 · Bengaluru, India</div>
+    <h1 class="hero-name">Shreyas<br>S <span>Rai</span></h1>
+    <p class="hero-tagline">Robotics & Automation Engineer building <em>autonomous mobile robots</em>, full-stack ROS 2 navigation, and <em>intelligent embedded systems</em> from hardware to deployment.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">4×</div><div class="hero-stat-label">Competition Winner</div></div>
+      <div><div class="hero-stat-num">3</div><div class="hero-stat-label">IISc Research Projects</div></div>
+      <div><div class="hero-stat-num">2</div><div class="hero-stat-label">Research Institutes</div></div>
+      <div><div class="hero-stat-num">8.6</div><div class="hero-stat-label">GPA</div></div>
+    </div>
   </div>
 </section>
 

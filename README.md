@@ -1,64 +1,62 @@
-# Shreyas S Rai — Portfolio
+# Shreyas S Rai | Robotics Portfolio
 
-Personal portfolio site hosted via GitHub Pages.
+Personal portfolio website for robotics, embedded systems, autonomous navigation, and industrial automation work.
 
-🌐 **Live at:** `https://SH047.github.io`
+Live site: [https://SH047.github.io](https://SH047.github.io)
 
-## Folder Structure
+## Focus
 
-```
-portfolio/
-├── index.html          ← main portfolio file
+This portfolio highlights practical engineering work across:
+
+- Autonomous mobile robots with ROS 2, Nav2, SLAM Toolbox, LiDAR, IMU, wheel odometry, and EKF-based localization
+- Open-source quadruped robotics through ECHO Q, including mechanical design, embedded hardware, gait control, and ROS navigation
+- End-to-end ROS navigation robots built from custom chassis, electronics, and software integration
+- Embedded AI and acoustic awareness systems using ESP32, I2S microphones, BLE, and edge ML workflows
+- Industrial robotics work involving ABB, FANUC, WAAM, DED, Modbus TCP/IP, and multi-robot cell integration
+- EMG-controlled prosthetic arm prototyping with signal conditioning, embedded control, and 3D printed mechanisms
+
+## Featured Sections
+
+- **Hero:** cinematic video-led introduction
+- **About:** background, availability, and profile
+- **Skills:** industry-oriented robotics software, autonomy, perception, embedded systems, industrial automation, controls, DevOps, and mechanical design
+- **Projects:** detailed engineering case studies with full-image previews
+- **GitHub Projects:** public code repositories and prototypes
+- **Experience:** research and product development roles
+- **Resume:** downloadable resume and email-based resume submission flow
+- **Contact:** direct email, phone, LinkedIn, and GitHub links
+
+## Repository Structure
+
+```text
+.
+├── index.html
 ├── README.md
 ├── assets/
 │   └── Shreyas_S_Rai_Resume.pdf
 └── images/
     ├── profile/
-    │   └── profile.jpeg         ← Your photo
+    │   └── profile.jpeg
     └── projects/
-        ├── amr.jpeg             ← Wheeled AMR project photo
-        ├── echoq.jpeg           ← ECHO-Q quadruped photo
-        ├── arraybutton.png      ← ArrayButton/IISc project photo
-        ├── waam.jpeg            ← IIT Dharwad WAAM cell photo
-        └── emg.jpeg             ← EMG prosthetic arm photo
+        ├── amr.jpeg
+        ├── echoq.jpeg
+        ├── end2end.png
+        ├── arraybutton.png
+        ├── waam.jpeg
+        └── emg.jpeg
 ```
 
-## How to Add Your Photos
+## Tech
 
-1. Take photos / screenshots of each project
-2. Rename them exactly as shown above
-3. Drop them into the `images/projects/` folder
-4. Push to GitHub — they appear automatically
+- Static HTML, CSS, and JavaScript
+- GitHub Pages hosting
+- Responsive layout
+- Video hero background
+- Lightweight image lightbox for project images
+- Mailto-based contact and resume exchange flow
 
-## How to Deploy (GitHub Pages)
+## Contact
 
-```bash
-# 1. Create repo named exactly: SH047.github.io
-#    Go to github.com/new → name it "SH047.github.io" → Public → Create
-
-# 2. Clone it
-git clone https://github.com/SH047/SH047.github.io.git
-cd SH047.github.io
-
-# 3. Copy all portfolio files in
-cp -r /path/to/portfolio/* .
-
-# 4. Push
-git add .
-git commit -m "launch: portfolio site"
-git push origin main
-
-# 5. Enable GitHub Pages
-#    Repo → Settings → Pages → Source: main → / (root) → Save
-
-# Done — live at https://SH047.github.io in ~60 seconds
-```
-
-## Updating Later
-
-```bash
-# Edit index.html, add new project images, then:
-git add .
-git commit -m "update: added new project"
-git push origin main
-```
+- Email: [Shreyas.rai.47@gmail.com](mailto:Shreyas.rai.47@gmail.com)
+- GitHub: [github.com/SH047](https://github.com/SH047)
+- LinkedIn: [linkedin.com/in/shreyas-s-rai](https://www.linkedin.com/in/shreyas-s-rai)
