@@ -103,9 +103,11 @@
   .project-card:hover { background:var(--bg3); }
   .project-inner { display:grid; grid-template-columns:1fr 380px; gap:0; }
   .project-content { padding:2.5rem; }
-  .project-img-wrap { position:relative; overflow:hidden; border-left:1px solid var(--border); }
+  .project-img-wrap { position:relative; overflow:hidden; border-left:1px solid var(--border); cursor:zoom-in; }
   .project-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
   .project-card:hover .project-img-wrap img { transform:scale(1.03); }
+  .project-img-wrap::after { content:'View full image'; position:absolute; right:1rem; bottom:1rem; padding:0.35rem 0.65rem; background:rgba(10,10,10,0.72); border:1px solid var(--border); color:var(--text); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0; transform:translateY(6px); transition:opacity 0.2s,transform 0.2s; pointer-events:none; }
+  .project-img-wrap:hover::after { opacity:1; transform:translateY(0); }
   .project-img-placeholder { width:100%; height:100%; min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.75rem; background:var(--bg3); color:var(--muted); font-size:0.8rem; text-align:center; padding:1rem; }
   .project-img-filename { font-size:0.7rem; color:rgba(136,136,128,0.5); font-family:monospace; margin-top:0.25rem; }
   .project-number { font-family:'Syne',sans-serif; font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; margin-bottom:0.75rem; }
@@ -116,10 +118,21 @@
   .badge-oss { background:rgba(232,255,74,0.1); color:var(--accent); border:1px solid rgba(232,255,74,0.2); }
   .badge-research { background:rgba(255,255,255,0.05); color:var(--muted); border:1px solid var(--border); }
   .project-desc { font-size:0.9rem; color:var(--muted); line-height:1.7; }
+  .project-points { color:var(--muted); font-size:0.9rem; line-height:1.7; padding-left:1.1rem; }
+  .project-points li { margin-bottom:0.45rem; }
   .project-stack { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.25rem; }
   .stack-tag { font-size:0.7rem; padding:0.25rem 0.6rem; background:var(--bg3); border:1px solid var(--border); border-radius:1px; color:var(--muted); }
   .project-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--accent); text-decoration:none; font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-top:1.5rem; transition:gap 0.2s; }
   .project-link:hover { gap:0.75rem; }
+
+  .image-lightbox { position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:3rem; background:rgba(0,0,0,0.88); backdrop-filter:blur(10px); opacity:0; visibility:hidden; transition:opacity 0.24s ease,visibility 0.24s ease; }
+  .image-lightbox.open { opacity:1; visibility:visible; }
+  .lightbox-panel { position:relative; max-width:min(1100px,92vw); max-height:86vh; transform:scale(0.94); opacity:0; transition:transform 0.28s ease,opacity 0.28s ease; }
+  .image-lightbox.open .lightbox-panel { transform:scale(1); opacity:1; }
+  .lightbox-panel img { display:block; max-width:100%; max-height:82vh; object-fit:contain; border:1px solid var(--border); background:#000; box-shadow:0 24px 80px rgba(0,0,0,0.55); }
+  .lightbox-caption { color:var(--muted); font-size:0.82rem; margin-top:0.85rem; text-align:center; }
+  .lightbox-close { position:absolute; top:-2.75rem; right:0; width:2.2rem; height:2.2rem; border:1px solid var(--border); background:rgba(10,10,10,0.82); color:var(--text); cursor:pointer; font-size:1.25rem; line-height:1; transition:border-color 0.2s,color 0.2s; }
+  .lightbox-close:hover { border-color:var(--border-hover); color:var(--accent); }
 
   /* GITHUB PROJECTS */
   #github-projects { border-top:1px solid var(--border); }
@@ -284,56 +297,96 @@
 
 <section id="skills">
   <div class="section-label">Skills</div>
-  <h2 class="skills-intro">Built on<br><span>real hardware.</span></h2>
+  <h2 class="skills-intro">Industry-ready<br><span>robotics stack.</span></h2>
   <div class="skills-grid">
     <div class="skill-card">
-      <div class="skill-cat">Navigation</div>
-      <h3>Mobile Robotics</h3>
+      <div class="skill-cat">Robotics Software</div>
+      <h3>ROS & Middleware</h3>
       <div class="skill-tags">
-        <span class="tag">ROS 2 Jazzy</span><span class="tag">ROS 1 Noetic</span><span class="tag">Nav2</span>
-        <span class="tag">SLAM Toolbox</span><span class="tag">gmapping</span><span class="tag">AMCL</span>
-        <span class="tag">move_base</span><span class="tag">EKF Fusion</span><span class="tag">robot_localization</span>
+        <span class="tag">ROS 2 Jazzy</span><span class="tag">ROS 1 Noetic</span><span class="tag">rclcpp</span>
+        <span class="tag">rclpy</span><span class="tag">TF2</span><span class="tag">URDF / Xacro</span>
+        <span class="tag">Lifecycle Nodes</span><span class="tag">DDS Concepts</span><span class="tag">ros2_control</span>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">Embedded</div>
-      <h3>Hardware & Systems</h3>
+      <div class="skill-cat">Autonomy</div>
+      <h3>Navigation & SLAM</h3>
+      <div class="skill-tags">
+        <span class="tag">Nav2</span><span class="tag">SLAM Toolbox</span><span class="tag">gmapping</span>
+        <span class="tag">AMCL</span><span class="tag">move_base</span><span class="tag">Costmaps</span>
+        <span class="tag">Path Planning</span><span class="tag">EKF Fusion</span><span class="tag">robot_localization</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Perception</div>
+      <h3>Vision & Sensor Fusion</h3>
+      <div class="skill-tags">
+        <span class="tag">OpenCV</span><span class="tag">Camera Calibration</span><span class="tag">LiDAR Processing</span>
+        <span class="tag">IMU Fusion</span><span class="tag">Wheel Odometry</span><span class="tag">Point Clouds</span>
+        <span class="tag">Edge Impulse</span><span class="tag">Wake-word Models</span><span class="tag">Whisper STT</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Embedded Systems</div>
+      <h3>Firmware & Hardware</h3>
       <div class="skill-tags">
         <span class="tag">Raspberry Pi 5/4</span><span class="tag">Arduino</span><span class="tag">ESP32</span>
         <span class="tag">BNO055 IMU</span><span class="tag">RPLiDAR</span><span class="tag">PCA9685</span>
-        <span class="tag">Motor Control</span><span class="tag">PID Tuning</span><span class="tag">PCB Design</span>
+        <span class="tag">FreeRTOS Basics</span><span class="tag">Motor Drivers</span><span class="tag">PCB Design</span>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">Protocols</div>
-      <h3>Communication</h3>
+      <div class="skill-cat">Communication</div>
+      <h3>Protocols & Interfaces</h3>
       <div class="skill-tags">
         <span class="tag">I2C</span><span class="tag">SPI</span><span class="tag">UART</span>
-        <span class="tag">CAN Bus</span><span class="tag">Modbus TCP/IP</span><span class="tag">BLE (NimBLE)</span>
+        <span class="tag">CAN Bus</span><span class="tag">Modbus TCP/IP</span><span class="tag">BLE / NimBLE</span>
+        <span class="tag">MQTT</span><span class="tag">TCP/IP</span><span class="tag">REST APIs</span>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">Software</div>
-      <h3>Programming</h3>
+      <div class="skill-cat">Software Engineering</div>
+      <h3>Languages & Tooling</h3>
       <div class="skill-tags">
         <span class="tag">Python</span><span class="tag">C++</span><span class="tag">Embedded C</span>
-        <span class="tag">Linux (Ubuntu)</span><span class="tag">Git</span><span class="tag">OpenCV</span><span class="tag">Shell Scripting</span>
+        <span class="tag">Kotlin</span><span class="tag">TypeScript</span><span class="tag">Linux / Ubuntu</span>
+        <span class="tag">Git</span><span class="tag">Shell Scripting</span><span class="tag">Debugging</span>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">Industrial</div>
-      <h3>Robot Systems</h3>
+      <div class="skill-cat">Simulation & Testing</div>
+      <h3>Robot Validation</h3>
+      <div class="skill-tags">
+        <span class="tag">Gazebo</span><span class="tag">RViz</span><span class="tag">RobotStudio</span>
+        <span class="tag">Roboguide</span><span class="tag">Bag Analysis</span><span class="tag">System Bring-up</span>
+        <span class="tag">Field Testing</span><span class="tag">Sensor Calibration</span><span class="tag">Failure Debugging</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Industrial Robotics</div>
+      <h3>Automation Systems</h3>
       <div class="skill-tags">
         <span class="tag">ABB IRB</span><span class="tag">RobotStudio</span>
         <span class="tag">FANUC M-20iD</span><span class="tag">Roboguide</span><span class="tag">Multi-robot Cell</span>
+        <span class="tag">WAAM</span><span class="tag">DED</span><span class="tag">End-effector Design</span>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-cat">Design & Fab</div>
-      <h3>Mechanical</h3>
+      <div class="skill-cat">Controls & DevOps</div>
+      <h3>Deployment Readiness</h3>
+      <div class="skill-tags">
+        <span class="tag">PID Tuning</span><span class="tag">Motor Control</span><span class="tag">Kinematics</span>
+        <span class="tag">Docker Basics</span><span class="tag">GitHub Actions</span><span class="tag">SSH Deployment</span>
+        <span class="tag">Ubuntu Server</span><span class="tag">Networking</span><span class="tag">Log Analysis</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Mechanical & Product</div>
+      <h3>Design for Build</h3>
       <div class="skill-tags">
         <span class="tag">Fusion 360</span><span class="tag">Solid Edge</span>
-        <span class="tag">FDM Printing</span><span class="tag">SLA Printing</span><span class="tag">Tolerance Analysis</span>
+        <span class="tag">FDM Printing</span><span class="tag">SLA Printing</span><span class="tag">DFM</span>
+        <span class="tag">Tolerance Analysis</span><span class="tag">Rapid Prototyping</span><span class="tag">Wiring Harnesses</span>
       </div>
     </div>
   </div>
@@ -347,16 +400,20 @@
     <div class="project-card">
       <div class="project-inner">
         <div class="project-content">
-          <div class="project-number">01 — Current</div>
+          <div class="project-number">01 — Jan 2026 – Present</div>
           <div class="project-header">
             <div class="project-title">Wheeled AMR — ROS 2 Navigation Stack</div>
             <span class="project-badge badge-live">Active Build</span>
           </div>
-          <p class="project-desc">Ground-up autonomous mobile robot on Raspberry Pi 5 running Ubuntu Server 24.04 ARM64 with full ROS 2 Jazzy stack. RPLiDAR A1, BNO055 IMU, and wheel encoders fused through EKF via robot_localization. Nav2 + SLAM Toolbox for real-time indoor mapping and autonomous navigation. Custom 3-level MDF chassis, L298N motor driver, all wiring from scratch.</p>
+          <ul class="project-points">
+            <li>Building a wheeled AMR from scratch on Raspberry Pi 5 with Ubuntu Server 24.04 ARM64; deployed and validated a full ROS 2 Jazzy environment directly on hardware.</li>
+            <li>Integrating RPLiDAR A1, wheel encoders, BNO055 IMU, and ToF sensors into an EKF-based state estimation pipeline using robot_localization.</li>
+            <li>Deploying Nav2 with SLAM Toolbox for real-time mapping and autonomous point-to-point navigation in indoor environments.</li>
+          </ul>
           <div class="project-stack">
             <span class="stack-tag">ROS 2 Jazzy</span><span class="stack-tag">Nav2</span><span class="stack-tag">SLAM Toolbox</span>
-            <span class="stack-tag">EKF</span><span class="stack-tag">RPLiDAR A1</span><span class="stack-tag">Raspberry Pi 5</span>
-            <span class="stack-tag">Ubuntu 24.04 ARM64</span><span class="stack-tag">robot_localization</span>
+            <span class="stack-tag">Ubuntu 24.04 ARM64</span><span class="stack-tag">Raspberry Pi 5</span><span class="stack-tag">RPLiDAR A1</span>
+            <span class="stack-tag">BNO055</span><span class="stack-tag">ToF Sensors</span><span class="stack-tag">robot_localization</span>
           </div>
         </div>
         <div class="project-img-wrap">
@@ -369,16 +426,21 @@
     <div class="project-card">
       <div class="project-inner">
         <div class="project-content">
-          <div class="project-number">02 — Open Source</div>
+          <div class="project-number">02 — Jan 2024 – Jan 2026</div>
           <div class="project-header">
             <div class="project-title">ECHO-Q — Quadruped Autonomous Robot</div>
             <span class="project-badge badge-oss">Open Source</span>
           </div>
-          <p class="project-desc">Full quadruped built from scratch: carbon fibre-infused SLA/FDM chassis, 12× 25 kg servos via I2C PCA9685, Dingo-based geometric IK, and complete ROS 1 Noetic navigation stack (gmapping → AMCL → move_base). Custom PCB: star-point power distribution, TPS54560 buck converter, parallel MOSFET E-stop. Won 4 collegiate competitions including IISc ROBOArena 2025.</p>
+          <ul class="project-points">
+            <li>Engineered a full quadruped from scratch with a custom SLA/FDM chassis, carbon fibre-infused PLA, 12x 25 kg servos over I2C PCA9685, and Dingo-based geometric IK for gait control.</li>
+            <li>Built an EKF sensor-fusion and ROS navigation stack using BNO055, LiDAR, and Pi Camera inputs with gmapping, AMCL, and move_base for autonomous indoor navigation.</li>
+            <li>Designed a custom PCB with star-point power distribution, parallel MOSFET switching, TPS54560 buck conversion, and TCA9548A I2C multiplexing.</li>
+            <li>KSCST-funded open-source project showcased at four collegiate competitions, winning all four.</li>
+          </ul>
           <div class="project-stack">
-            <span class="stack-tag">ROS 1 Noetic</span><span class="stack-tag">Raspberry Pi 4</span>
-            <span class="stack-tag">BNO055</span><span class="stack-tag">RPLiDAR</span><span class="stack-tag">PCA9685</span>
-            <span class="stack-tag">PCB Design</span><span class="stack-tag">SLA/FDM</span>
+            <span class="stack-tag">Raspberry Pi</span><span class="stack-tag">Ubuntu 20.04</span><span class="stack-tag">ROS</span>
+            <span class="stack-tag">Robot Kinematics</span><span class="stack-tag">OpenCV</span><span class="stack-tag">Machine Vision</span>
+            <span class="stack-tag">LiDAR</span><span class="stack-tag">IMU</span><span class="stack-tag">Custom PCB</span>
           </div>
           <a href="https://github.com/SH047/ECHO_Q" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
         </div>
@@ -392,7 +454,32 @@
     <div class="project-card">
       <div class="project-inner">
         <div class="project-content">
-          <div class="project-number">03 — IISc CPDM</div>
+          <div class="project-number">03 — Nov 2025 – Jan 2026</div>
+          <div class="project-header">
+            <div class="project-title">End-to-End Autonomous Navigation Robot</div>
+            <span class="project-badge badge-oss">Autonomy Build</span>
+          </div>
+          <ul class="project-points">
+            <li>Built a ground-up AMR covering mechanical design in Fusion 360, custom motor-driver electronics, full ROS navigation integration, and zero third-party robot kits.</li>
+            <li>Tuned the gmapping, AMCL, move_base, and DWA pipeline for reliable autonomous navigation in cluttered indoor environments.</li>
+            <li>Designed and fabricated the custom chassis with FDM manufacturing, then integrated LiDAR, Raspberry Pi compute, and low-level drive hardware into a deployable mobile platform.</li>
+          </ul>
+          <div class="project-stack">
+            <span class="stack-tag">ROS Noetic</span><span class="stack-tag">LiDAR</span><span class="stack-tag">Raspberry Pi</span>
+            <span class="stack-tag">Custom Chassis</span><span class="stack-tag">FDM Fabrication</span><span class="stack-tag">move_base / DWA</span>
+          </div>
+        </div>
+        <div class="project-img-wrap">
+          <img src="images/projects/end2end.png" alt="End-to-End Autonomous Navigation Robot"
+            onerror="this.parentElement.innerHTML='<div class=\'project-img-placeholder\'>📷<span>Add End-to-End robot photo<span class=\'project-img-filename\'>images/projects/end2end.png</span></span></div>'">
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-content">
+          <div class="project-number">04 — IISc CPDM</div>
           <div class="project-header">
             <div class="project-title">ArrayButton — Acoustic Awareness Platform</div>
             <span class="project-badge badge-research">Research</span>
@@ -414,7 +501,7 @@
     <div class="project-card">
       <div class="project-inner">
         <div class="project-content">
-          <div class="project-number">04 — IIT Dharwad</div>
+          <div class="project-number">05 — IIT Dharwad</div>
           <div class="project-header">
             <div class="project-title">Hybrid WAAM/DED Robotic Manufacturing Cell</div>
             <span class="project-badge badge-research">Research</span>
@@ -436,15 +523,19 @@
     <div class="project-card">
       <div class="project-inner">
         <div class="project-content">
-          <div class="project-number">05</div>
+          <div class="project-number">06 — Aug 2023 – Dec 2023</div>
           <div class="project-header">
             <div class="project-title">Vital — EMG-Controlled Prosthetic Arm</div>
             <span class="project-badge badge-research">HMI Research</span>
           </div>
-          <p class="project-desc">Designed 2-stage amplifier and 20–500 Hz bandpass filter for sEMG signal acquisition and real-time gesture classification. Fabricated 5-DOF underactuated hand with tendon-driven linkages in Fusion 360, FDM printed PLA. Full signal conditioning circuit on Arduino Nano.</p>
+          <ul class="project-points">
+            <li>Designed a 2-stage amplifier and 20-500 Hz bandpass filter for sEMG acquisition with real-time threshold-based gesture classification.</li>
+            <li>Fabricated a 5-DOF underactuated prosthetic hand with tendon-driven linkages designed in Fusion 360 and FDM printed in PLA.</li>
+            <li>Implemented embedded control on Arduino Nano for EMG signal conditioning, gesture interpretation, and servo actuation.</li>
+          </ul>
           <div class="project-stack">
-            <span class="stack-tag">Arduino Nano</span><span class="stack-tag">Embedded C</span>
-            <span class="stack-tag">Signal Conditioning</span><span class="stack-tag">Fusion 360</span><span class="stack-tag">FDM</span>
+            <span class="stack-tag">Arduino Nano</span><span class="stack-tag">EMG Sensor</span><span class="stack-tag">Signal Conditioning</span>
+            <span class="stack-tag">Servo Actuation</span><span class="stack-tag">Embedded C</span><span class="stack-tag">3D Printing</span>
           </div>
         </div>
         <div class="project-img-wrap">
@@ -648,7 +739,50 @@
   <span>Bengaluru, India</span>
 </footer>
 
+<div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+  <div class="lightbox-panel">
+    <button class="lightbox-close" type="button" aria-label="Close image preview">×</button>
+    <img src="" alt="" id="lightboxImage">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
 <script>
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const closeLightboxButton = document.querySelector('.lightbox-close');
+
+function openLightbox(image) {
+  lightboxImage.src = image.currentSrc || image.src;
+  lightboxImage.alt = image.alt;
+  lightboxCaption.textContent = image.alt;
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if (!lightbox.classList.contains('open')) lightboxImage.src = '';
+  }, 260);
+}
+
+document.querySelectorAll('.project-img-wrap img').forEach(image => {
+  image.addEventListener('click', () => openLightbox(image));
+});
+
+closeLightboxButton.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', event => {
+  if (event.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+});
+
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const formData = new FormData(this);
